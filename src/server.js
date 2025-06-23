@@ -1,7 +1,11 @@
 import http from "node:http";
 
-function listener(req, res) {
-  //Function
+import { jsonHandler } from "./middlewares/jsonHandler.js";
+import { routeHandler } from "./middlewares/routeHandler.js";
+
+async function listener(req, res) {
+  await jsonHandler(req, res);
+  routeHandler(req, res);
 }
 
 http.createServer(listener).listen(3333);
