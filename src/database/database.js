@@ -34,11 +34,9 @@ export class Database {
 
     if (filters) {
       data = data.filter((row) => {
-        const object = Object.entries(filters).some(([key, value]) => {
+        return Object.entries(filters).some(([key, value]) => {
           return row[key].toLowerCase().includes(value.toLowerCase());
         });
-
-        return object;
       });
     }
 
