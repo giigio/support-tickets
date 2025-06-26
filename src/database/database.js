@@ -29,8 +29,19 @@ export class Database {
     this.#persist();
   }
 
-  select(table) {
+  select(table, filters) {
     let data = this.#database[table] ?? [];
+
+    if (filters) {
+      data = data.filter((row) => {
+        const object = Object.entries(filters).some(([key, value]) => {
+          return row[key].toLowerCase().includes(value.toLowerCase());
+        });
+
+        return object;
+      });
+    }
+
     return data;
   }
 }
